@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 interface ThemeContextValue {
     dark: boolean;
@@ -11,6 +11,19 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
     const [dark, setDark] = useState(false);
+
+    // Restore persisted preference after hydration (avoids SSR mismatch)
+    useEffect(() => {
+        try {
+            const getTheme = async () => {
+                if (localStorage.getItem('theme') === 'dark') {
+                    setDark(true);
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+            getTheme();
+        } catch {}
+    }, []);
 
     function toggle() {
         const next = !dark;
