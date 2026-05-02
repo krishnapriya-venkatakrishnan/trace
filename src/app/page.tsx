@@ -21,6 +21,9 @@ export default async function Home() {
                 <Link href="/upload" className="px-4 py-2 rounded-lg border border-border text-ink text-sm font-medium hover:bg-surface transition">
                     Upload document
                 </Link>
+                <Link href="/dashboard" className="px-4 py-2 rounded-lg border border-border text-ink text-sm font-medium hover:bg-surface transition">
+                    Dashboard
+                </Link>
             </div>
         </main>
     );

@@ -1,19 +1,26 @@
 @import "tailwindcss";
+/* Tremor v3 class scanning — tailwind.config.ts does not exist in Tailwind v4;
+   @source is the v4 equivalent of the content array entry Tremor docs describe */
+@source "../node_modules/@tremor/react/dist";
 
 /* ─── Design tokens (light mode) ─────────────────────────────────────── */
 :root {
     --paper:       #fafaf8;
+    --paper-2:     #efebe3;
     --surface:     #ffffff;
     --ink:         #1a1a18;
     --ink-2:       #4b4b48;
     --muted:       #8b95a2;
+    --muted-2:     #8a867e;
     --navy:        #0f1c2e;
     --navy-light:  #1a2f47;
     --navy-muted:  #3d5068;
     --accent:      #3b82f6;
     --accent-dim:  #dbeafe;
     --border:      rgba(0, 0, 0, 0.08);
+    --border-soft: rgba(0, 0, 0, 0.05);
     --border-navy: rgba(255, 255, 255, 0.08);
+    --hover:       rgba(0, 0, 0, 0.04);
     --success:     #16a34a;
     --warning:     #d97706;
     --error:       #dc2626;
@@ -25,12 +32,19 @@
 /* ─── Dark mode overrides ─────────────────────────────────────────────── */
 [data-theme="dark"] {
     --paper:       #111318;
+    --paper-2:     #131311;
     --surface:     #1a1d23;
     --ink:         #e8e8e5;
     --ink-2:       #9ca3af;
     --muted:       #6b7280;
+    --muted-2:     #6f6b62;
     --accent-dim:  #1e3a5f;
     --border:      rgba(255, 255, 255, 0.08);
+    --border-soft: rgba(255, 255, 255, 0.05);
+    --hover:       rgba(255, 255, 255, 0.05);
+    --success:     #4ade80;
+    --warning:     #f59e0b;
+    --error:       #f87171;
 
     --background:  var(--paper);
     --foreground:  var(--ink);
@@ -39,17 +53,21 @@
 /* ─── Tailwind v4 theme tokens ────────────────────────────────────────── */
 @theme inline {
     --color-paper:       var(--paper);
+    --color-paper-2:     var(--paper-2);
     --color-surface:     var(--surface);
     --color-ink:         var(--ink);
     --color-ink-2:       var(--ink-2);
     --color-muted:       var(--muted);
+    --color-muted-2:     var(--muted-2);
     --color-navy:        var(--navy);
     --color-navy-light:  var(--navy-light);
     --color-navy-muted:  var(--navy-muted);
     --color-accent:      var(--accent);
     --color-accent-dim:  var(--accent-dim);
     --color-border:      var(--border);
+    --color-border-soft: var(--border-soft);
     --color-border-navy: var(--border-navy);
+    --color-hover:       var(--hover);
     --color-success:     var(--success);
     --color-warning:     var(--warning);
     --color-error:       var(--error);
