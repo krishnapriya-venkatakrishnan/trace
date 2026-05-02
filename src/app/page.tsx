@@ -24,6 +24,9 @@ export default async function Home() {
                 <Link href="/dashboard" className="px-4 py-2 rounded-lg border border-border text-ink text-sm font-medium hover:bg-surface transition">
                     Dashboard
                 </Link>
+                <Link href="/evals" className="px-4 py-2 rounded-lg border border-border text-ink text-sm font-medium hover:bg-surface transition">
+                    Evaluations
+                </Link>
             </div>
         </main>
     );

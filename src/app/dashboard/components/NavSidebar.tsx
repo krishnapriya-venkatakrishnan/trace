@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BarChart3Icon, MessageSquareIcon, UploadIcon } from 'lucide-react';
+import { BarChart3Icon, FlaskConicalIcon, MessageSquareIcon, UploadIcon } from 'lucide-react';
 
 const links = [
     { href: '/ask',       icon: MessageSquareIcon, label: 'Ask'       },
     { href: '/upload',    icon: UploadIcon,        label: 'Upload'    },
     { href: '/dashboard', icon: BarChart3Icon,     label: 'Dashboard' },
+    { href: '/evals',     icon: FlaskConicalIcon,  label: 'Evals'     },
 ];
 
 export function NavSidebar() {
