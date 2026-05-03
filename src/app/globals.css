@@ -5,14 +5,14 @@
 
 /* ─── Design tokens (light mode) ─────────────────────────────────────── */
 :root {
-    --paper:       #fafaf8;
+    --paper:       #F5F2EC;
     --paper-2:     #efebe3;
     --surface:     #ffffff;
     --ink:         #1a1a18;
     --ink-2:       #4b4b48;
     --muted:       #8b95a2;
     --muted-2:     #8a867e;
-    --navy:        #0f1c2e;
+    --navy:        #1E3A8A;
     --navy-light:  #1a2f47;
     --navy-muted:  #3d5068;
     --accent:      #3b82f6;
