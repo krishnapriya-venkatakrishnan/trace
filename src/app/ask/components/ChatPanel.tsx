@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from 'react';
 import { experimental_useObject as useObject } from '@ai-sdk/react';
 import { AnswerSchema } from '@/lib/generation/schema';
 import { useQuery } from '../QueryContext';
+import { useTheme } from '@/app/ThemeContext';
 
 interface Source {
     number: number;
@@ -33,6 +34,7 @@ export function ChatPanel() {
     const [totalLatencyMs, setTotalLatencyMs] = useState<number | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const streamStartRef = useRef<number>(0);
+    const { dark } = useTheme();
 
     const { submit, object, isLoading, stop } = useObject({
         api: '/api/ask',
@@ -92,13 +94,48 @@ export function ChatPanel() {
     );
 
     return (
-        <main className="flex flex-col flex-1 min-w-0 h-full bg-paper overflow-hidden">
+        <main className="flex flex-col flex-1 min-w-0 bg-paper overflow-hidden border-r border-paper-2">
             {/* Top bar */}
-            <header className="px-8 py-5 border-b border-border bg-surface shrink-0">
-                <h1 className="font-serif text-xl font-semibold text-ink">Ask a question</h1>
-                <p className="text-sm text-muted mt-0.5">Search across your document corpus</p>
+            <header className="px-8 py-5 shrink-0">
+                <h1 className="text-sm font-medium text-navy-muted mt-0.5">Search across your document corpus</h1>
+            
+                {/* Input bar — pinned to bottom */}
+                <div className="shrink-0 py-4 border-b border-border">
+                    <form onSubmit={handleSubmit} className="flex gap-3 items-end">
+                        <textarea
+                            value={question}
+                            onChange={(e) => setQuestion(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    doSubmit();
+                                }
+                            }}
+                            placeholder="What would you like to know? (Enter to send)"
+                            rows={2}
+                            className={`flex-1 resize-none rounded-xl border   ${dark ? "border-border" : "border-navy bg-paper-2"} px-4 py-3 text-sm text-navy-muted placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition`}
+                            disabled={isLoading}
+                        />
+                        {isLoading ? (
+                            <button
+                                type="button"
+                                onClick={stop}
+                                className="shrink-0 h-11 px-5 rounded-xl bg-error text-white text-sm font-medium hover:bg-red-700 transition"
+                            >
+                                Stop
+                            </button>
+                        ) : (
+                            <button
+                                type="submit"
+                                disabled={!question.trim()}
+                                className={`shrink-0 h-11 px-5 rounded-xl ${dark ? "bg-navy/20 border-navy/20 text-white/80 border hover:bg-navy-muted" : "bg-navy hover:bg-navy-light text-white "} text-sm font-medium transition cursor-pointer`}
+                            >
+                                Ask
+                            </button>
+                        )}
+                    </form>
+                </div>
             </header>
-
             {/* Scrollable answer area — flex-1 so it fills the space between header and input */}
             <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
                 {/* Empty state */}
@@ -131,14 +168,14 @@ export function ChatPanel() {
                 {/* Streaming / completed answer */}
                 {(isLoading || answer) && (
                     <div className="space-y-5">
-                        <div className="p-5 rounded-2xl bg-surface border border-border shadow-sm">
+                        <div className={`p-5 rounded-2xl bg-surface border border-border shadow-sm`}>
                             {answer ? (
-                                <p className="text-ink leading-relaxed text-[15px]">
+                                <p className={`${dark ? "text-muted" : "text-navy-muted"} text-sm`}>
                                     {citationSegments.map((seg, i) =>
                                         seg.type === 'cite' ? (
                                             <sup
                                                 key={i}
-                                                className="inline-flex items-center justify-center w-4 h-4 text-[10px] font-mono font-semibold bg-accent-dim text-accent rounded mx-0.5 align-super"
+                                                className={`inline-flex items-center justify-center w-4 h-4 text-[10px] font-mono font-semibold bg-navy/20 ${dark ? "text-muted" : "text-navy"} rounded mx-0.5 align-super`}
                                             >
                                                 {seg.value}
                                             </sup>
@@ -191,8 +228,8 @@ export function ChatPanel() {
                                             key={s.chunkId}
                                             className="p-3 rounded-xl border border-border bg-surface text-sm"
                                         >
-                                            <p className="font-medium text-ink">
-                                                <span className="inline-flex items-center justify-center w-5 h-5 text-[10px] font-mono font-semibold bg-accent-dim text-accent rounded mr-1.5">
+                                            <p className="font-medium text-navy-muted">
+                                                <span className={`inline-flex items-center justify-center w-5 h-5 text-[10px] font-mono font-semibold ${dark ? "bg-navy/20 text-muted" : "bg-navy/20 text-navy"} rounded mr-1.5`}>
                                                     {s.number}
                                                 </span>
                                                 {s.documentTitle}
@@ -209,42 +246,7 @@ export function ChatPanel() {
                 )}
             </div>
 
-            {/* Input bar — pinned to bottom */}
-            <div className="shrink-0 px-8 py-5 border-t border-border bg-surface">
-                <form onSubmit={handleSubmit} className="flex gap-3 items-end">
-                    <textarea
-                        value={question}
-                        onChange={(e) => setQuestion(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault();
-                                doSubmit();
-                            }
-                        }}
-                        placeholder="What would you like to know? (Enter to send)"
-                        rows={2}
-                        className="flex-1 resize-none rounded-xl border border-border bg-paper px-4 py-3 text-sm text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition"
-                        disabled={isLoading}
-                    />
-                    {isLoading ? (
-                        <button
-                            type="button"
-                            onClick={stop}
-                            className="shrink-0 h-11 px-5 rounded-xl bg-error text-white text-sm font-medium hover:bg-red-700 transition"
-                        >
-                            Stop
-                        </button>
-                    ) : (
-                        <button
-                            type="submit"
-                            disabled={!question.trim()}
-                            className="shrink-0 h-11 px-5 rounded-xl bg-navy text-white text-sm font-medium hover:bg-navy-light disabled:opacity-40 transition"
-                        >
-                            Ask
-                        </button>
-                    )}
-                </form>
-            </div>
+            
         </main>
     );
 }

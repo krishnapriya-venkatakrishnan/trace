@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export default function AskPage() {
     return (
-        <div className="flex h-screen overflow-hidden bg-paper">
+        <div className="flex my-20 overflow-hidden bg-paper">
             <Sidebar />
             <QueryProvider>
                 <ChatPanel />

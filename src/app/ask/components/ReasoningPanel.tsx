@@ -49,7 +49,7 @@ function ThemeToggle() {
     return (
         <button
             onClick={toggle}
-            className="flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors"
+            className="flex items-center gap-1.5 text-xs text-muted hover:text-navy-muted transition-colors"
             title="Toggle theme"
         >
             {dark ? (
@@ -73,7 +73,7 @@ function PhaseRow({ phase, call }: { phase: LLMPhase; call: LLMCall | undefined 
 
     return (
         <div
-            className="flex items-start gap-3 transition-all duration-300"
+            className="flex items-start gap-4 transition-all duration-300"
             style={{ opacity: done ? 1 : 0.35 }}
         >
             {/* Icon + connector */}
@@ -83,21 +83,21 @@ function PhaseRow({ phase, call }: { phase: LLMPhase; call: LLMCall | undefined 
                         isError
                             ? 'bg-red-50 border-red-300 text-error'
                             : done
-                            ? 'bg-accent-dim border-accent/30 text-accent'
+                            ? 'bg-navy/30 border-navy/30 text-navy'
                             : 'bg-border border-border text-muted'
                     }`}
                 >
                     {meta.icon}
                 </div>
                 {phase !== 'generation' && (
-                    <div className={`w-px flex-1 mt-1 min-h-[20px] transition-colors duration-300 ${done ? 'bg-accent/20' : 'bg-border'}`} />
+                    <div className={`w-px flex-1 mt-1 min-h-[60px] transition-colors duration-300 ${done ? 'bg-navy/20' : 'bg-border'}`} />
                 )}
             </div>
 
             {/* Content */}
             <div className="pb-4 min-w-0">
                 <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-ink">{meta.label}</span>
+                    <span className="text-[0.8rem] font-medium text-navy-muted">{meta.label}</span>
                     {done && !isError && (
                         <span className="text-xs font-mono text-muted tabular-nums">
                             {call!.latency_ms}ms
@@ -111,10 +111,11 @@ function PhaseRow({ phase, call }: { phase: LLMPhase; call: LLMCall | undefined 
 
                 {/* Token / cost details */}
                 {done && !isError && (
-                    <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-mono text-muted/80">
+                    <div className="mt-2 gap-x-3 gap-y-1 text-[11px] font-mono text-muted/80">
                         {call!.model && (
                             <span className="px-1.5 py-0.5 rounded bg-border">{call!.model}</span>
                         )}
+                        <div className='flex items-center gap-3 mt-2'>
                         {call!.input_tokens > 0 && (
                             <span>↑{call!.input_tokens.toLocaleString()} tok</span>
                         )}
@@ -124,6 +125,7 @@ function PhaseRow({ phase, call }: { phase: LLMPhase; call: LLMCall | undefined 
                         {call!.cost_usd > 0 && (
                             <span>${Number(call!.cost_usd).toFixed(5)}</span>
                         )}
+                        </div>
                     </div>
                 )}
             </div>
@@ -177,14 +179,12 @@ export function ReasoningPanel() {
     const donePhases = phaseOrder.filter((p) => byPhase[p]).length;
 
     return (
-        <aside className="flex flex-col h-full w-80 shrink-0 border-l border-border bg-surface overflow-hidden">
+        <aside className="flex flex-col h-full w-80 shrink-0 overflow-hidden px-4">
             {/* Header */}
             <div className="px-5 py-5 border-b border-border flex items-center justify-between">
                 <div>
-                    <h2 className="text-sm font-semibold text-ink">How this was made</h2>
-                    <p className="text-xs text-muted mt-0.5">RAG pipeline trace</p>
+                    <h2 className="text-sm font-medium text-navy-muted">How this answer was made</h2>
                 </div>
-                <ThemeToggle />
             </div>
 
             {/* Pipeline timeline */}
@@ -205,8 +205,8 @@ export function ReasoningPanel() {
 
             {/* Summary footer */}
             {queryId && donePhases > 0 && (
-                <div className="shrink-0 px-5 py-4 border-t border-border bg-paper">
-                    <div className="flex justify-between text-xs font-mono text-muted">
+                <div className="shrink-0 py-8 fixed bottom-0 mb-18 border-t border-border bg-paper">
+                    <div className="flex w-[280px] justify-between text-xs font-mono text-muted">
                         <span>
                             {donePhases}/{phaseOrder.length} phases
                             {isStreaming && (

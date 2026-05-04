@@ -20,11 +20,11 @@ const Navbar = () => {
 
         <nav style={{ display: 'flex', gap: 28, alignItems: 'center', fontSize: 13, color: 'var(--muted)' }}>
             <Link href="/ask" style={{ color: 'var(--muted)', textDecoration: 'none' }}
-                className="hover:text-ink! transition-colors duration-100">Ask</Link>
+                className="hover:text-navy-muted! transition-colors duration-100">Ask</Link>
             <Link href="/dashboard" style={{ color: 'var(--muted)', textDecoration: 'none' }}
-                className="hover:text-ink! transition-colors duration-100">Dashboard</Link>
+                className="hover:text-navy-muted! transition-colors duration-100">Dashboard</Link>
             <Link href="/evals" style={{ color: 'var(--muted)', textDecoration: 'none' }}
-                className="hover:text-ink! transition-colors duration-100">Evals</Link>
+                className="hover:text-navy-muted! transition-colors duration-100">Evals</Link>
             <ThemeToggleButton />
         </nav>
     </header>
