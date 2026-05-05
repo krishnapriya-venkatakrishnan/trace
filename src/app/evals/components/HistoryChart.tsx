@@ -36,7 +36,7 @@ function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: 
 export function HistoryChart({ data }: { data: HistoryPoint[] }) {
     if (data.length === 0) {
         return (
-            <div className="bg-surface border border-border rounded-xl p-5 flex items-center justify-center h-40 text-sm text-muted">
+            <div className="bg-paper border border-border rounded-xl p-5 flex items-center justify-center h-40 text-sm text-muted">
                 No history yet — run evaluations to populate this chart.
             </div>
         );
@@ -45,7 +45,7 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
     const transitions = data.filter((d) => d.versionLabel != null);
 
     return (
-        <div className="bg-surface border border-border rounded-xl p-5 space-y-3">
+        <div className="bg-paper border border-border rounded-xl p-10 space-y-3">
             <div className="flex items-center justify-between">
                 <p className="text-xs text-muted font-medium uppercase tracking-wide">Pass-rate history</p>
                 <p className="text-xs text-muted">{data.length} days · annotated with prompt versions</p>

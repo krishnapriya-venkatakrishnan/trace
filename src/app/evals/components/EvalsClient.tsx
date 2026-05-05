@@ -405,11 +405,11 @@ export function EvalsClient({ initialEvals, initialRuns, historyData }: Props) {
     }, [sessionResults, runsByEval, selectedVersion]);
 
     return (
-        <div className="px-8 py-6 space-y-6 max-w-5xl mx-auto">
+        <div className="px-8 py-22 space-y-6 max-w-5xl mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                    <h1 className="text-xl font-semibold text-ink">Evaluations</h1>
+                    <h1 className="text-xl font-semibold text-navy-muted">Evaluations</h1>
                     <p className="text-sm text-muted">
                         {initialEvals.length} test cases
                         {lastRunStats && (
@@ -445,7 +445,7 @@ export function EvalsClient({ initialEvals, initialRuns, historyData }: Props) {
 
             {/* Run stats bar — shown after a full run */}
             {lastRunStats && (
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 bg-surface border border-border rounded-xl text-xs font-mono">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 bg-paper border border-border rounded-xl text-xs font-mono">
                     <span className={`font-medium ${lastRunStats.passed === lastRunStats.total ? 'text-success' : 'text-error'}`}>
                         {lastRunStats.passed}/{lastRunStats.total} passed
                     </span>
@@ -477,22 +477,12 @@ export function EvalsClient({ initialEvals, initialRuns, historyData }: Props) {
                         ))}
                     </div>
 
-                    {/* Sort controls */}
-                    <div className="flex items-center gap-1 text-xs text-muted">
-                        <span className="mr-1">sort:</span>
-                        {([['score', 'Score'], ['status', 'Status'], ['latency', 'Latency'], ['cost', 'Cost']] as [SortField, string][]).map(([f, l]) => (
-                            <SortHeader key={f} label={l} field={f} current={sortField} dir={sortDir} onClick={toggleSort} />
-                        ))}
-                        {sortField !== 'default' && (
-                            <button onClick={() => { setSortField('default'); }} className="ml-2 text-muted-2 hover:text-ink">reset</button>
-                        )}
-                    </div>
                 </div>
             )}
 
             {/* Eval table */}
             {initialEvals.length === 0 ? (
-                <div className="bg-surface border border-border rounded-xl flex flex-col items-center justify-center py-16 gap-3 text-center">
+                <div className="bg-paper border border-border rounded-xl flex flex-col items-center justify-center py-16 gap-3 text-center">
                     <MinusIcon size={28} className="text-muted" />
                     <p className="text-sm text-muted">No evaluation cases yet.</p>
                     <p className="text-xs text-muted">
@@ -500,7 +490,7 @@ export function EvalsClient({ initialEvals, initialRuns, historyData }: Props) {
                     </p>
                 </div>
             ) : (
-                <div className="bg-surface border border-border rounded-xl overflow-hidden">
+                <div className="bg-paper border border-border rounded-xl overflow-hidden">
                     {/* Column headers */}
                     <div
                         className="grid items-center gap-3 px-5 py-2.5 border-b border-border bg-paper text-xs text-muted font-medium uppercase tracking-wide"
@@ -543,7 +533,7 @@ export function EvalsClient({ initialEvals, initialRuns, historyData }: Props) {
             {/* Pass-rate history chart */}
             <div>
                 <div className="flex items-baseline justify-between mb-3">
-                    <h2 className="text-sm font-semibold text-ink uppercase tracking-wide">History</h2>
+                    <h2 className="text-sm font-semibold text-navy-muted uppercase tracking-wide">History</h2>
                     <span className="text-xs text-muted">28 days · annotated with prompt versions</span>
                 </div>
                 <HistoryChart data={historyData} />

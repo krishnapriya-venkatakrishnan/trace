@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Navbar = () => {
     return (
-    <header className='bg-paper flex items-center justify-between px-8 py-4 top-0 fixed w-full'>
+    <header className='bg-paper flex items-center justify-between px-8 py-4 top-0 fixed w-full z-10'>
         <div
             style={{
                 letterSpacing: '-0.01em',

@@ -61,9 +61,9 @@ export function QualitySection({ qualityOverTime }: { qualityOverTime: QualityRo
                             <Line
                                 type="monotone"
                                 dataKey="successRate"
-                                stroke="rgba(30, 58, 138, 1)"
+                                stroke="rgba(58, 138, 30, 0.5)"
                                 strokeWidth={2}
-                                dot={{ r: 3, fill: 'rgba(30, 58, 138, 1)' }}
+                                dot={{ r: 3, fill: 'rgba(58, 138, 30, 0.5)' }}
                             />
                         </LineChart>
                     </ResponsiveContainer>

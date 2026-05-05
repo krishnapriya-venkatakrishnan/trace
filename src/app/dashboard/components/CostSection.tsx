@@ -16,10 +16,10 @@ import {
 import type { CostByPhaseRow, CostByModelRow } from '@/lib/dashboard/queries';
 
 const phaseColors: Record<string, string> = {
-    embedding:  'rgba(30, 58, 138, 0)',
-    retrieval:  'rgba(30, 58, 138, 0.25)',
-    rerank:     'rgba(30, 58, 138, 0.5)',
-    generation: 'rgba(30, 58, 138, 1)',
+    embedding:  'rgba(58, 30, 138, 0.5)',
+    retrieval:  'rgba(30, 58, 138, 0.5)',
+    rerank:     'rgba(138, 58, 30, 0.5)',
+    generation: 'rgba(58, 138, 30, 1)',
 };
 
 function fmt(v: number) {
@@ -84,7 +84,7 @@ export function CostSection({ costByPhase, costByModel }: Props) {
                                 <Tooltip formatter={(v) => fmt(Number(v))} contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '12px', color: 'var(--ink)' }} itemStyle={{ color: 'var(--ink)' }} cursor={{ fill: 'transparent' }} />
                                 <Bar dataKey="cost" radius={[0, 4, 4, 0]}>
                                     {costByModel.map((_, i) => (
-                                        <Cell key={i} fill="#1E3A8A" />
+                                        <Cell key={i} fill="rgba(138, 58, 138, 0.5)" />
                                     ))}
                                 </Bar>
                             </BarChart>

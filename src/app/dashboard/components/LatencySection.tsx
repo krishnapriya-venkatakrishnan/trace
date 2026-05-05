@@ -15,7 +15,7 @@ import {
 } from 'recharts';
 import type { LatencyRow } from '@/lib/dashboard/queries';
 
-const pColors = { p50: 'rgba(30, 58, 138, 1)', p95: 'rgba(30, 58, 138, 0.75)', p99: 'rgba(30, 58, 138, 0.5)' };
+const pColors = { p50: 'rgba(58, 30, 138, 0.5)', p95: 'rgba(30, 58, 138, 0.5)', p99: 'rgba(138, 58, 30, 0.5)' };
 
 function msLabel(v: unknown) {
     const n = Number(v);
@@ -39,7 +39,7 @@ function buildHistogram(rows: LatencyRow[]): HistoBin[] {
     return bins.map((count, i) => ({
         range: msLabel(i * step),
         count,
-        color: i * step >= p95 ? 'rgba(30, 58, 138, 1)' : i * step >= p95 * 0.75 ? 'rgba(30, 58, 138, 0.75)' : 'rgba(30, 58, 138, 0.5)',
+        color: i * step >= p95 ? 'rgba(58, 30, 138, 1)' : i * step >= p95 * 0.75 ? 'rgba(58, 30, 138, 0.75)' : 'rgba(58, 30, 138, 0.5)',
     }));
 }
 

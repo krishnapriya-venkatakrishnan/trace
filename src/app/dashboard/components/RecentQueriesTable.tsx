@@ -60,7 +60,7 @@ export function RecentQueriesTable({ queries }: { queries: QueryRow[] }) {
                                             <td className="px-4 py-3 text-muted tabular-nums whitespace-nowrap">
                                                 {format(new Date(q.created_at), 'MMM d, HH:mm')}
                                             </td>
-                                            <td className="px-4 py-3 text-ink max-w-sm">
+                                            <td className="px-4 py-3 text-navy-muted max-w-sm">
                                                 <span className="line-clamp-1">{q.question}</span>
                                             </td>
                                             <td className="px-4 py-3">
