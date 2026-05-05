@@ -15,7 +15,7 @@ import {
 } from 'recharts';
 import type { LatencyRow } from '@/lib/dashboard/queries';
 
-const pColors = { p50: '#3b82f6', p95: '#f59e0b', p99: '#ef4444' };
+const pColors = { p50: 'rgba(30, 58, 138, 1)', p95: 'rgba(30, 58, 138, 0.75)', p99: 'rgba(30, 58, 138, 0.5)' };
 
 function msLabel(v: unknown) {
     const n = Number(v);
@@ -39,7 +39,7 @@ function buildHistogram(rows: LatencyRow[]): HistoBin[] {
     return bins.map((count, i) => ({
         range: msLabel(i * step),
         count,
-        color: i * step >= p95 ? '#ef4444' : i * step >= p95 * 0.75 ? '#f59e0b' : '#3b82f6',
+        color: i * step >= p95 ? 'rgba(30, 58, 138, 1)' : i * step >= p95 * 0.75 ? 'rgba(30, 58, 138, 0.75)' : 'rgba(30, 58, 138, 0.5)',
     }));
 }
 
@@ -48,18 +48,18 @@ export function LatencySection({ latencyByDay }: { latencyByDay: LatencyRow[] })
 
     return (
         <section className="space-y-4">
-            <h2 className="text-sm font-semibold text-ink uppercase tracking-wide">Latency</h2>
+            <h2 className="text-sm font-semibold text-navy-muted uppercase tracking-wide">Latency</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 {/* Percentile lines */}
-                <div className="lg:col-span-2 bg-surface border border-border rounded-xl p-5">
+                <div className="lg:col-span-2 bg-paper border border-border rounded-xl p-5">
                     <p className="text-xs text-muted mb-4 font-medium">Latency Percentiles Over Time</p>
                     <ResponsiveContainer width="100%" height={220}>
                         <LineChart data={latencyByDay} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                             <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'var(--muted)' }} />
                             <YAxis tickFormatter={msLabel} tick={{ fontSize: 11, fill: 'var(--muted)' }} width={56} />
-                            <Tooltip formatter={(v) => msLabel(v)} contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '12px' }} />
+                            <Tooltip formatter={(v) => msLabel(v)} contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '12px' }} cursor={{ fill: 'transparent' }} />
                             <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '12px' }} />
                             {(['p50', 'p95', 'p99'] as const).map((k) => (
                                 <Line
@@ -76,7 +76,7 @@ export function LatencySection({ latencyByDay }: { latencyByDay: LatencyRow[] })
                 </div>
 
                 {/* Histogram */}
-                <div className="bg-surface border border-border rounded-xl p-5">
+                <div className="bg-paper border border-border rounded-xl p-5">
                     <p className="text-xs text-muted mb-4 font-medium">p50 Distribution</p>
                     {histo.length === 0 ? (
                         <div className="flex items-center justify-center h-[220px] text-sm text-muted">No data</div>
@@ -85,7 +85,7 @@ export function LatencySection({ latencyByDay }: { latencyByDay: LatencyRow[] })
                             <BarChart data={histo} margin={{ top: 0, right: 8, bottom: 0, left: 0 }}>
                                 <XAxis dataKey="range" tick={{ fontSize: 10, fill: 'var(--muted)' }} />
                                 <YAxis tick={{ fontSize: 11, fill: 'var(--muted)' }} allowDecimals={false} />
-                                <Tooltip contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '12px' }} />
+                                <Tooltip contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '12px' }} cursor={{ fill: 'transparent' }} />
                                 <Bar dataKey="count" radius={[4, 4, 0, 0]}>
                                     {histo.map((bin, i) => (
                                         <Cell key={i} fill={bin.color} />

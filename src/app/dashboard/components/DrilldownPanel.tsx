@@ -49,7 +49,7 @@ function CallCard({ call }: { call: LlmCallDetail }) {
             </button>
 
             {open && (
-                <div className="px-4 py-3 bg-surface border-t border-border space-y-2 text-sm">
+                <div className="px-4 py-3 bg-paper-2 border-t border-border space-y-2 text-sm">
                     <Row label="Input tokens"      value={call.input_tokens?.toLocaleString() ?? '—'} />
                     <Row label="Output tokens"     value={call.output_tokens?.toLocaleString() ?? '—'} />
                     <Row label="Time to first tok" value={msLabel(call.time_to_first_token_ms)} />
@@ -109,10 +109,10 @@ export function DrilldownPanel({ queryId, onClose }: Props) {
             />
 
             {/* Panel */}
-            <div className="fixed right-0 top-0 h-full w-full max-w-xl bg-surface border-l border-border shadow-2xl z-40 flex flex-col overflow-hidden">
+            <div className="fixed right-0 top-0 h-full w-full max-w-xl bg-paper border-l border-border shadow-2xl z-40 flex flex-col overflow-hidden">
                 {/* Header */}
                 <div className="flex items-center justify-between gap-3 px-6 py-4 border-b border-border shrink-0">
-                    <h2 className="text-sm font-semibold text-ink">Query Detail</h2>
+                    <h2 className="text-sm font-semibold text-navy-muted">Query Detail</h2>
                     <button
                         onClick={onClose}
                         className="text-muted hover:text-ink transition-colors"
@@ -145,21 +145,21 @@ export function DrilldownPanel({ queryId, onClose }: Props) {
 
                             {/* Meta */}
                             <div className="grid grid-cols-2 gap-3 text-sm">
-                                <div className="bg-paper rounded-lg p-3 space-y-1">
+                                <div className="bg-paper rounded-lg p-3 space-y-1 border border-navy/20">
                                     <p className="text-xs text-muted">Status</p>
                                     <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${statusBadge(detail.status)}`}>
                                         {detail.status}
                                     </span>
                                 </div>
-                                <div className="bg-paper rounded-lg p-3 space-y-1">
+                                <div className="bg-paper rounded-lg p-3 space-y-1 border border-navy/20">
                                     <p className="text-xs text-muted">Total latency</p>
                                     <p className="font-medium tabular-nums">{msLabel(detail.total_latency_ms)}</p>
                                 </div>
-                                <div className="bg-paper rounded-lg p-3 space-y-1">
+                                <div className="bg-paper rounded-lg p-3 space-y-1 border border-navy/20">
                                     <p className="text-xs text-muted">Total cost</p>
                                     <p className="font-medium tabular-nums">{usd(detail.total_cost_usd)}</p>
                                 </div>
-                                <div className="bg-paper rounded-lg p-3 space-y-1">
+                                <div className="bg-paper rounded-lg p-3 space-y-1 border border-navy/20">
                                     <p className="text-xs text-muted">Tokens (in/out)</p>
                                     <p className="font-medium tabular-nums">
                                         {detail.total_input_tokens?.toLocaleString() ?? '—'} / {detail.total_output_tokens?.toLocaleString() ?? '—'}

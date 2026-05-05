@@ -20,18 +20,18 @@ function pctLabel(v: unknown) {
 export function QualitySection({ qualityOverTime }: { qualityOverTime: QualityRow[] }) {
     return (
         <section className="space-y-4">
-            <h2 className="text-sm font-semibold text-ink uppercase tracking-wide">Quality</h2>
+            <h2 className="text-sm font-semibold text-navy-muted uppercase tracking-wide">Quality</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* Success rate area */}
-                <div className="bg-surface border border-border rounded-xl p-5">
+                <div className="bg-paper border border-border rounded-xl p-5">
                     <p className="text-xs text-muted mb-4 font-medium">Success Rate Over Time</p>
                     <ResponsiveContainer width="100%" height={200}>
                         <AreaChart data={qualityOverTime} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
                             <defs>
                                 <linearGradient id="successGradient" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%"  stopColor="#10b981" stopOpacity={0.4} />
-                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}   />
+                                    <stop offset="5%"  stopColor="rgba(30, 58, 138, 1)" stopOpacity={0.4} />
+                                    <stop offset="95%" stopColor="rgba(30, 58, 138, 1)" stopOpacity={0}   />
                                 </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
@@ -41,7 +41,7 @@ export function QualitySection({ qualityOverTime }: { qualityOverTime: QualityRo
                             <Area
                                 type="monotone"
                                 dataKey="successRate"
-                                stroke="#10b981"
+                                stroke="rgba(30, 58, 138, 1)"
                                 strokeWidth={2}
                                 fill="url(#successGradient)"
                             />
@@ -50,7 +50,7 @@ export function QualitySection({ qualityOverTime }: { qualityOverTime: QualityRo
                 </div>
 
                 {/* Line — same data, alternative view */}
-                <div className="bg-surface border border-border rounded-xl p-5">
+                <div className="bg-paper border border-border rounded-xl p-5">
                     <p className="text-xs text-muted mb-4 font-medium">Success Rate Trend</p>
                     <ResponsiveContainer width="100%" height={200}>
                         <LineChart data={qualityOverTime} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
@@ -61,9 +61,9 @@ export function QualitySection({ qualityOverTime }: { qualityOverTime: QualityRo
                             <Line
                                 type="monotone"
                                 dataKey="successRate"
-                                stroke="var(--accent)"
+                                stroke="rgba(30, 58, 138, 1)"
                                 strokeWidth={2}
-                                dot={{ r: 3, fill: 'var(--accent)' }}
+                                dot={{ r: 3, fill: 'rgba(30, 58, 138, 1)' }}
                             />
                         </LineChart>
                     </ResponsiveContainer>

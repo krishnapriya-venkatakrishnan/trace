@@ -29,10 +29,10 @@ export function RecentQueriesTable({ queries }: { queries: QueryRow[] }) {
 
     return (
         <>
-            <section className="space-y-4">
-                <h2 className="text-sm font-semibold text-ink uppercase tracking-wide">Recent Queries</h2>
+            <section className="space-y-4 pb-20">
+                <h2 className="text-sm font-semibold text-navy-muted uppercase tracking-wide">Recent Queries</h2>
 
-                <div className="bg-surface border border-border rounded-xl overflow-hidden">
+                <div className="bg-paper border border-border rounded-xl overflow-hidden">
                     {queries.length === 0 ? (
                         <div className="flex items-center justify-center py-16 text-sm text-muted">
                             No queries yet in this time range.

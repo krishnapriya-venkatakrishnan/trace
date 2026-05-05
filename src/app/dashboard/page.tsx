@@ -35,12 +35,12 @@ export default async function DashboardPage({
     const { todayStats, costByPhase, costByModel, latencyByDay, qualityOverTime, recentQueries } = data;
 
     return (
-        <div className="px-8 py-6 space-y-8 max-w-7xl mx-auto">
+        <div className="px-8 py-6 mt-20 space-y-8 max-w-7xl mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-semibold text-ink">Observability</h1>
-                    <p className="text-sm text-muted">Query pipeline metrics and costs</p>
+                    <h1 className="text-sm font-medium text-navy-muted">Observability: Query pipeline metrics and costs</h1>
+                    <p className="text-sm text-muted"></p>
                 </div>
                 <Suspense>
                     <TimeRangePicker current={range} />
